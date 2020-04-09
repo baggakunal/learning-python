@@ -10,3 +10,7 @@ for line in story:
 story.close();
 for word in story_words:
     print(word)
+
+
+def square(x):
+    return x * x
