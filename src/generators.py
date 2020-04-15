@@ -25,4 +25,17 @@ def run_pipeline():
         print(item)
 
 
+def lucas():
+    yield 2
+    a = 2
+    b = 1
+    while True:
+        yield b
+        a, b = b, a + b
+
+
 run_pipeline()
+for x in lucas():
+    print(x)
+    if x > 1000:
+        break
