@@ -34,8 +34,20 @@ def lucas():
         a, b = b, a + b
 
 
-run_pipeline()
-for x in lucas():
-    print(x)
-    if x > 1000:
-        break
+# run_pipeline()
+
+
+# for x in lucas():
+#     print(x)
+#     if x > 1000:
+#         break
+
+
+# using list will result in computing million_squares in a single show and will result in about 40MB of memory
+# million_squares = (x*x for x in range(10000001))
+# list(million_squares)[-10:0]
+
+
+# Uses almost no memory
+# If we had implemented using list, will consume about 400MB of memory
+# print(sum(x * x for x in range(10000001)))
