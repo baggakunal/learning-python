@@ -102,30 +102,40 @@ class Flight:
 
 class Aircraft:
 
-    def __init__(self, registration, model, num_rows, num_seats_per_row):
+    def __init__(self, registration):
         self._registration = registration
-        self._model = model
-        self._num_rows = num_rows
-        self._num_seats_per_row = num_seats_per_row
 
     def registration(self):
         return self._registration
 
+    def num_seats(self):
+        rows, row_seats = self.seating_plan()
+        return len(rows) * len(row_seats)
+
+
+class AirbusA319(Aircraft):
+
     def model(self):
-        return self._model
+        return "Airbus A319"
 
     def seating_plan(self):
-        return (
-            range(1, self._num_rows + 1),
-            "ABCDEFGHJK"[:self._num_seats_per_row]
-        )
+        return range(1, 23), "ABCDEF"
+
+
+class Boeing777(Aircraft):
+
+    def model(self):
+        return "Boeing 777"
+
+    def seating_plan(self):
+        return range(1, 56), "ABCDEFGHJK"
 
 
 def console_card_printer(passenger, seat, flight_number, aircraft):
-    output = f"| Name: {passenger}"      \
+    output = f"| Name: {passenger}" \
              f" Flight: {flight_number}" \
-             f" Seat: {seat}"            \
-             f" Aircraft: {aircraft}"    \
+             f" Seat: {seat}" \
+             f" Aircraft: {aircraft}" \
              " |"
     banner = "+" + "-" * (len(output) - 2) + "+"
     border = "|" + " " * (len(output) - 2) + "|"
@@ -135,12 +145,18 @@ def console_card_printer(passenger, seat, flight_number, aircraft):
     print()
 
 
-def make_flight():
-    aircraft = Aircraft("G-EUPT", "Airbus A319", num_rows=22, num_seats_per_row=6)
-    flight = Flight("BA758", aircraft)
-    flight.allocate_seat("12A", "Guido van Rossum")
-    flight.allocate_seat("15F", "Bjarne Stoustrup")
-    flight.allocate_seat("15E", "Anders Hejlsberg")
-    flight.allocate_seat("1C", "John McCarthy")
-    flight.allocate_seat("1D", "Rich Hickey")
-    return flight
+def make_flights():
+    flight1 = Flight("BA758", AirbusA319("G-EUPT"))
+    flight1.allocate_seat("12A", "Guido van Rossum")
+    flight1.allocate_seat("15F", "Bjarne Stoustrup")
+    flight1.allocate_seat("15E", "Anders Hejlsberg")
+    flight1.allocate_seat("1C", "John McCarthy")
+    flight1.allocate_seat("1D", "Rich Hickey")
+
+    flight2 = Flight("AF72", Boeing777("F-GSPS"))
+    flight2.allocate_seat("55K", "Larry Wall")
+    flight2.allocate_seat("33G", "Yukihiro Matsumoto")
+    flight2.allocate_seat("4B", "Brian Kernighan")
+    flight2.allocate_seat("4A", "Dennis Ritchie")
+
+    return flight1, flight2
