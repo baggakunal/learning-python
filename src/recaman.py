@@ -17,19 +17,23 @@ def sequence():
 
 def write_sequence(filename, num):
     """Write Recaman's sequence to a text file."""
-    try:
-        file = open(filename, mode='wt', encoding='utf-8')
+    # try:
+    #     file = open(filename, mode='wt', encoding='utf-8')
+    #     file.writelines(f"{r}\n" for r in islice(sequence(), num + 1))
+    # finally:
+    #     file.close()
+    with open(filename, mode='wt', encoding='utf-8') as file:
         file.writelines(f"{r}\n" for r in islice(sequence(), num + 1))
-    finally:
-        file.close()
 
 
 def read_sequence(filename):
-    try:
-        file = open(filename, mode='rt', encoding='utf-8')
+    # try:
+    #     file = open(filename, mode='rt', encoding='utf-8')
+    #     return [int(line.strip()) for line in file]
+    # finally:
+    #     file.close()
+    with open(filename, mode='rt', encoding='utf-8') as file:
         return [int(line.strip()) for line in file]
-    finally:
-        file.close()
 
 
 def main(filename, num):
