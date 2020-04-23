@@ -68,6 +68,32 @@ def write_grayscale(filename, pixels):
         bmp.write(_int32_to_bytes(pixel_data_bookmark))
 
 
+def dimensions(filename):
+    """Determine the dimensions in pixels of a BMP image.
+
+    Args:
+        filename: The filename of a BMP file.
+
+    Returns:
+        A tuple containing two integers with the width
+        and height in pixels.
+
+    Raises:
+        ValueError: If the file was not a BMP file.
+        OSError: If there was a problem reading the file.
+    """
+    with open(filename, mode='rb') as file:
+        magic = file.read(2)
+        if magic != b'BM':
+            raise ValueError("{} is not a BMP file".format(filename))
+
+        file.seek(18)
+        width_bytes = file.read(4)
+        height_bytes = file.read(4)
+
+        return _bytes_to_int32(width_bytes), _bytes_to_int32(height_bytes)
+
+
 def _int32_to_bytes(i):
     """Convert an integer to four bytes in little-endian format."""
     # &: Bitwise-and
@@ -76,3 +102,8 @@ def _int32_to_bytes(i):
                   i >> 8 & 0xff,
                   i >> 16 & 0xff,
                   i >> 24 & 0xff))
+
+
+def _bytes_to_int32(b):
+    """Convert a bytes object containing four bytes into an integer."""
+    return b[0] | (b[1] << 8) | (b[2] << 16) | (b[3] << 24)
