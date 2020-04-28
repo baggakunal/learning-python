@@ -29,10 +29,7 @@ We will discuss::
 - and more...
 
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
+.. include:: modules.rst
 
 
 Indices and tables
