@@ -1,6 +1,7 @@
 from math import sqrt
 
-def is_prime(num):
+
+def is_prime(num: int) -> bool:
     if num < 2:
         return False
     for i in range(2, int(sqrt(num)) + 1):

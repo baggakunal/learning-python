@@ -1,9 +1,9 @@
 
-def nth_root(radicand, n):
+def nth_root(radicand: int, n: int) -> float:
     return radicand ** (1/n)
 
 
-def ordinal_suffix(value):
+def ordinal_suffix(value: int) -> str:
     s = str(value)
 
     if s.endswith('11'):
@@ -22,11 +22,11 @@ def ordinal_suffix(value):
         return 'th'
 
 
-def ordinal(value):
+def ordinal(value: int) -> str:
     return str(value) + ordinal_suffix(value)
 
 
-def display_nth_root(radicand, n):
-    root = nth_root(radicand, n)
-    message = "The " + ordinal(n) + " root of " + str(radicand) + " is " + str(root)
+def display_nth_root(radicand: int, n: int) -> None:
+    root: float = nth_root(radicand, n)
+    message: str = "The " + ordinal(n) + " root of " + str(radicand) + " is " + str(root)
     print(message)
